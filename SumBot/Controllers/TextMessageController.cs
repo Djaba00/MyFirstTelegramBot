@@ -15,40 +15,40 @@ namespace SumBot.Controllers
 
         public TextMessageController(IStorage memoryStorage, ITelegramBotClient botClient)
         {
-	    _telegramClient = botClient;
+	        _telegramClient = botClient;
             _memoryStorage = memoryStorage;
         }
 
-	public async Task Handle(Message message, CancellationToken ct)
-	{
-            switch(message.Text)
+        public async Task Handle(Message message, CancellationToken ct)
+        {
+            switch (message.Text)
             {
                 case "/start":
-		    var buttons = new List<InlineKeyboardButton[]>();
-		    buttons.Add(new[]
-	            {
-		        InlineKeyboardButton.WithCallbackData($"Text length", $"text"),
-		        InlineKeyboardButton.WithCallbackData($"Sum of numbers", $"nums")
-	            });
+                    var buttons = new List<InlineKeyboardButton[]>();
+                    buttons.Add(new[]
+                    {
+                    InlineKeyboardButton.WithCallbackData($"Text length", $"text"),
+                    InlineKeyboardButton.WithCallbackData($"Sum of numbers", $"nums")
+                    });
 
                     // передаем кнопки вместе с сообщением (параметр ReplyMarkup)
                     await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b> Бот умеет:\n1) Вычислять длину тукста" +
-		            $"\n2) Суммировать числа.</b> {Environment.NewLine}",
+                    $"\n2) Суммировать числа.</b> {Environment.NewLine}",
                             cancellationToken: ct, parseMode: ParseMode.Html, replyMarkup: new InlineKeyboardMarkup(buttons));
                     break;
                 default:
-	            if(_memoryStorage.GetSession(message.Chat.Id).SumType == "nums")
-		    {
+                    if (_memoryStorage.GetSession(message.Chat.Id).SumType == "nums")
+                    {
                         await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"{SumNums.SumResult(message.Text)}",
-		            cancellationToken: ct);
-		    }
-		    else
-		    {
+                            cancellationToken: ct);
+                    }
+                    else
+                    {
                         await _telegramClient.SendTextMessageAsync(message.Chat.Id,
-			    $"Длина сообщения: {TextLength.CalculateTextLength(message.Text)}",cancellationToken: ct);
+                            $"Длина сообщения: {TextLength.CalculateTextLength(message.Text)}", cancellationToken: ct);
                     }
                     break;
             }
-        } 
+        }
     }
 }

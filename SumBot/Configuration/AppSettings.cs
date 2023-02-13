@@ -3,7 +3,7 @@ namespace SumBot.Configuration
 {
     public class AppSettings
     {
-	/// <summary>
+	    /// <summary>
         /// Telegram Bot API
         /// </summary>
         public string BotToken { get; set; }
