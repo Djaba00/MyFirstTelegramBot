@@ -5,10 +5,10 @@ using SumBot.Services;
 
 namespace SumBot.Controllers
 {
-	public class InlineKeyboardController
+    public class InlineKeyboardController
     {
-		private readonly ITelegramBotClient _telegramClient;
-		private readonly IStorage _memoryStorage;
+	private readonly ITelegramBotClient _telegramClient;
+	private readonly IStorage _memoryStorage;
 
         public InlineKeyboardController(IStorage memoryStorage, ITelegramBotClient telegramBotClient)
         {
