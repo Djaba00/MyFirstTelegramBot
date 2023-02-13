@@ -27,12 +27,12 @@ namespace SumBot.Controllers
                     var buttons = new List<InlineKeyboardButton[]>();
                     buttons.Add(new[]
                     {
-                    InlineKeyboardButton.WithCallbackData($"Text length", $"text"),
-                    InlineKeyboardButton.WithCallbackData($"Sum of numbers", $"nums")
+                    InlineKeyboardButton.WithCallbackData($"Вычислить длину текста", $"text"),
+                    InlineKeyboardButton.WithCallbackData($"Вычислить сумму чисел", $"nums")
                     });
 
                     // передаем кнопки вместе с сообщением (параметр ReplyMarkup)
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b> Бот умеет:\n1) Вычислять длину тукста" +
+                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b> Бот умеет:\n1) Вычислять длину текста" +
                     $"\n2) Суммировать числа.</b> {Environment.NewLine}",
                             cancellationToken: ct, parseMode: ParseMode.Html, replyMarkup: new InlineKeyboardMarkup(buttons));
                     break;
