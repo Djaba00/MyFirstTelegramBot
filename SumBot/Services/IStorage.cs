@@ -2,8 +2,8 @@
 
 namespace SumBot.Services
 {
-	public interface IStorage
-	{
-		Session GetSession(long chatID);
-	}
+    public interface IStorage
+    {
+        Session GetSession(long chatID);
+    }
 }
